@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Adrenaline</title>
+    <meta property="og:title" content="Turbo Adrenaline">
+    <meta property="og:description" content="Join Turbo Adrenaline And Race Now!">
+    <meta property="og:image" content="https://rosaszoom.github.io/turbo/logo.png">
+    <meta property="og:url" content="http://www.viewzoom.ltd/?page_id=2">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Turbo Adrenaline">
+    <meta name="twitter:description" content="Join Turbo Adrenaline And Race Now!">
+    <meta name="twitter:image" content="https://rosaszoom.github.io/turbo/logo.png">
+    <script>
+        function getUrlParam() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('data');
+        }
+
+        function detectDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return 'iOS';
+            }
+            
+            if (/android/i.test(userAgent)) {
+                return 'Android';
+            }
+            
+            if (/Macintosh/.test(userAgent)) {
+                return 'Mac';
+            }
+            
+            return 'PC';
+        }
+
+        function tryOpenApp() {
+            const dataParam = getUrlParam();
+            const device = detectDevice();
+            const appScheme = 'tutboadrenaline://';
+            const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.conagame.coisland';
+            const appStoreUrl = 'https://apps.apple.com/app/id6740201964';
+            const fallbackUrl = 'https://www.viewzoom.ltd';
+            
+            let appDeepLink = appScheme;
+            if (dataParam) {
+                appDeepLink += '?data=' + encodeURIComponent(dataParam);
+            }
+            
+            if (device === 'Android') {
+                window.location.href = appDeepLink;
+                
+                setTimeout(function() {
+                    window.location.href = playStoreUrl;
+                }, 500);
+            } else if (device === 'iOS') {
+                window.location.href = appDeepLink;
+                
+                setTimeout(function() {
+                    window.location.href = appStoreUrl;
+                }, 500);
+            } else if (device === 'Mac') {
+                window.location.href = appStoreUrl;
+            } else {
+                window.location.href = playStoreUrl || fallbackUrl;
+            }
+        }
+        window.onload = tryOpenApp;
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+        }
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
+            border-radius: 20px;
+            object-fit: contain;
+        }
+        .app-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #EC2E2A;
+        }
+        h1 {
+            margin-bottom: 10px;
+            color: #EC2E2A;
+        }
+        p {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #EC2E2A;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #D02623;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Turbo Adrenaline Logo" class="logo">
+        <div class="app-name">Turbo Adrenaline</div>
+        <h1>Redirecting to App...</h1>
+        <p>If the redirect doesn't happen automatically, please click the buttons below.</p>
+        <a href="#" id="openAppBtn" class="button">Open App</a>
+        <a href="#" id="downloadBtn" class="button">Download App</a>
+    </div>
+
+    <script>
+        document.getElementById('openAppBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            tryOpenApp();
+        });
+        
+        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const device = detectDevice();
+            const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.conagame.coisland';
+            const appStoreUrl = 'https://apps.apple.com/app/id6740201964';
+            
+            if (device === 'Android') {
+                window.location.href = playStoreUrl;
+            } else if (device === 'iOS' || device === 'Mac') {
+                window.location.href = appStoreUrl;
+            } else {
+                window.location.href = playStoreUrl || 'http://www.viewzoom.ltd/?page_id=2';
+            }
+        });
+    </script>
+</body>
+</html>
